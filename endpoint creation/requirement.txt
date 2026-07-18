@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+psycopg[binary]
+python-dotenv
+pydantic
+dnspython==2.8.0
+email-validator==2.3.0
+idna==3.18

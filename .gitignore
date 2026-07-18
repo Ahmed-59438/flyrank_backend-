@@ -1,0 +1,8 @@
+# Ignore local workspace folder which was renamed to 'docker contanirized backend' but remains locked by the IDE process
+flyrank_task_2/
+
+# Common python / environment ignores
+.venv/
+__pycache__/
+*.pyc
+.env

@@ -15,15 +15,15 @@ DATA_DIR = BASE_DIR / "data"
 BASE_URL = "https://books.toscrape.com/catalogue/page-{page}.html"
 START_URL = "https://books.toscrape.com/"
 
+# Identification: Polite Bot User-Agent (Owner/Contact information is crucial)
+BOT_USER_AGENT = "BookScraperBot/1.0 (+https://books.toscrape.com/; bot@example.com)"
+
 # HTTP Request Configurations
 HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/122.0.0.0 Safari/537.36"
-    ),
+    "User-Agent": BOT_USER_AGENT,
     "Accept-Language": "en-US,en;q=0.9",
 }
+
 
 # Network & Resilience Parameters
 REQUEST_TIMEOUT = 10  # Seconds to wait for server response

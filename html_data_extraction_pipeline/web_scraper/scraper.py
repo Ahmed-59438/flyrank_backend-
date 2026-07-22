@@ -11,12 +11,14 @@ from typing import Optional
 import requests
 from config import (
     HEADERS,
+    BOT_USER_AGENT,
     REQUEST_TIMEOUT,
     REQUEST_DELAY,
     RETRY_COUNT,
     RETRY_BACKOFF_FACTOR,
 )
 from logger import get_logger
+from robots import is_allowed, get_crawl_delay
 
 logger = get_logger("scraper")
 
@@ -32,8 +34,17 @@ def fetch_page(url: str) -> Optional[str]:
         Optional[str]: Raw HTML string if request succeeds (HTTP 200),
                        or None if all retry attempts fail.
     """
-    # Rate Limiting: Pause before initiating request to be a polite scraper
-    time.sleep(REQUEST_DELAY)
+    # robots.txt Compliance Check
+    if not is_allowed(url, BOT_USER_AGENT):
+        logger.error(f"Access disallowed by robots.txt compliance rules for URL: {url}")
+        return None
+
+    # Dynamic Rate Limiting: Pause before initiating request to be a polite scraper
+    robots_delay = get_crawl_delay(url, BOT_USER_AGENT)
+    active_delay = max(REQUEST_DELAY, robots_delay) if robots_delay is not None else REQUEST_DELAY
+    if active_delay > REQUEST_DELAY:
+        logger.info(f"Using robots.txt crawl-delay of {active_delay}s instead of default {REQUEST_DELAY}s")
+    time.sleep(active_delay)
 
     for attempt in range(1, RETRY_COUNT + 1):
         try:

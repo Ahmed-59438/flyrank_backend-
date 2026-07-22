@@ -1,0 +1,38 @@
+# Python Cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Python Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+ENV/
+
+# Project Logs
+*.log
+web_scraper/scraper.log
+
+# Project Scraped Output Data
+web_scraper/data/
+data/
+
+# Credentials and Secrets
+.env
+.env.*
+*.pem
+*.key
+credentials*
+secrets*
+
+# Beginner Guide (as requested to ignore this beginner guide)
+web_scraper/beginner_guide.md
+beginner_guide.md
+
+# IDE and System Files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
